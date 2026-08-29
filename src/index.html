@@ -2,9 +2,160 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>TypeScript</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Expense Tracker</title>
   </head>
   <body>
+    <main class="container">
+      <!-- Authentication Section -->
+      <section id="authView" class="auth_layout">
+        <!-- Register / Signup Form -->
+        <form id="registerForm" class="card">
+          <p class="eyebrow">LOGIN / SIGNUP FOR OUR EXPENSE TRACKER</p>
+          <h1>Register</h1>
+          <!-- Name Input -->
+          <div>
+            <label>Name</label>
+            <input type="text" name="name" required placeholder="Enter Name" />
+          </div>
+          <!-- Email Input -->
+          <div>
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              required
+              placeholder="Enter Email"
+            />
+          </div>
+          <!-- Password Input -->
+          <div>
+            <label>Password</label>
+            <input
+              type="password"
+              name="pasword"
+              placeholder="Enter Password"
+              minlength="6"
+              required
+            />
+          </div>
+          <button type="submit">Create Account</button>
+        </form>
+        <!-- Login / Signin Form -->
+        <form id="loginForm" class="card">
+          <p class="eyebrow">LOCAL DEMO</p>
+          <h1>Login</h1>
+          <!-- Email Input -->
+          <div>
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              required
+              placeholder="Enter Email"
+            />
+          </div>
+          <!-- Password Input -->
+          <div>
+            <label>Password</label>
+            <input
+              type="password"
+              name="pasword"
+              placeholder="Enter Password"
+              minlength="6"
+              required
+            />
+          </div>
+          <button type="submit">Sign In</button>
+        </form>
+
+        <p id="authMessage" class="message" role="status"></p>
+      </section>
+
+      <!-- Web App Section -->
+      <section id="appView">
+        <!-- Header and desc -->
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">EXPENSE TRACKER WEB APP</p>
+            <h1 id="welcome"></h1>
+            <button id="signOutBtn" type="button" class="secondary">
+              Log Out
+            </button>
+          </div>
+        </header>
+        <!-- Category and expense -->
+        <section class="two_column">
+          <!-- Categories Form -->
+          <div class="card">
+            <h2>Categories</h2>
+            <form id="categoryForm" class="inline_form">
+              <input
+                type="text"
+                name="category"
+                placeholder="e.g. Software, Transport etc"
+                required
+              />
+
+              <button type="submit">Add Category</button>
+            </form>
+
+            <div id="categoryList" class="chips"></div>
+            <p id="categoryMessage" role="status" class="message"></p>
+          </div>
+          <!-- Add Expense Form -->
+          <div class="card">
+            <h2>Add Expenses</h2>
+            <form id="expenseForm">
+              <!-- Expense Title -->
+              <div>
+                <label>Title</label>
+                <input type="text" name="title" required />
+              </div>
+              <!-- Amount -->
+              <div>
+                <label>Amount</label>
+                <input type="number" name="amount" min="1" required />
+              </div>
+              <!-- Category -->
+              <div>
+                <label>Category</label>
+                <select name="category" id="categorySelect" required></select>
+              </div>
+              <!-- Scope -->
+              <div>
+                <label>Scope</label>
+                <select name="scope">
+                  <option value="personal">Personal</option>
+                  <option value="organization">Organization</option>
+                </select>
+              </div>
+
+              <button type="submit">Add Expenses</button>
+            </form>
+            <p id="expenseMessage" class="message" role="status"></p>
+          </div>
+        </section>
+
+        <!-- Expense List -->
+        <section class="card">
+          <div class="list_heading">
+            <div>
+              <h2>Expenses (List)</h2>
+              <p id="total"></p>
+            </div>
+
+            <div class="filters">
+              <button data-scope="personal" type="button">Personal</button>
+              <button data-scope="organization" type="button">
+                Organization
+              </button>
+            </div>
+          </div>
+          <ul id="expenseList" class="expense_list"></ul>
+        </section>
+      </section>
+    </main>
     <script type="module" src="./index.js"></script>
   </body>
 </html>

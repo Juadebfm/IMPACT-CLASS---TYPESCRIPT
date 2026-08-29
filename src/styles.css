@@ -1,0 +1,89 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #eef4ff;
+  color: #172554;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.container {
+  width: min(1050px, calc(100% - 32px));
+  margin: 40px auto;
+}
+
+.card {
+  padding: 25px;
+  background: #fff;
+  border: 1px solid #dbe3ee;
+  border: 12px;
+}
+
+.auth_layout,
+.two_column {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.topbar,
+.list_heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.two_column {
+  margin-bottom: 30px;
+}
+
+form {
+  display: grid;
+  gap: 12px;
+}
+
+.inline_form {
+  grid-template-columns: 1fr auto;
+}
+
+input,
+select,
+button {
+  margin-top: 10px;
+  padding: 12px;
+  border: 1px solid #dbe3ee;
+  border-radius: 6px;
+  font: inherit;
+  width: 100%;
+}
+
+button.secondary {
+  background: #ff0000;
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.message {
+  min-height: 20px;
+  color: #b42418;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #2563eb;
+  font-size: 14px;
+  letter-spacing: 0.15;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+
