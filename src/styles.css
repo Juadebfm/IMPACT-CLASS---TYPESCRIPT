@@ -86,4 +86,7 @@ button.secondary {
   margin-top: 14px;
 }
 
-
+.expense_item {
+  background: #000;
+  color: #fff;
+}
