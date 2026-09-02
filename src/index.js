@@ -1,3 +1,3 @@
-console.log("new");
+console.log("Check");
 export {};
 //# sourceMappingURL=index.js.map
