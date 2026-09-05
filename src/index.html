@@ -33,7 +33,7 @@
             <label>Password</label>
             <input
               type="password"
-              name="pasword"
+              name="password"
               placeholder="Enter Password"
               minlength="6"
               required
@@ -60,7 +60,7 @@
             <label>Password</label>
             <input
               type="password"
-              name="pasword"
+              name="password"
               placeholder="Enter Password"
               minlength="6"
               required
@@ -73,7 +73,7 @@
       </section>
 
       <!-- Web App Section -->
-      <section id="appView">
+      <section id="appView" hidden>
         <!-- Header and desc -->
         <header class="topbar">
           <div>
@@ -150,6 +150,7 @@
               <button data-scope="organization" type="button">
                 Organization
               </button>
+              <button data-scope="all" type="button">All</button>
             </div>
           </div>
           <ul id="expenseList" class="expense_list"></ul>

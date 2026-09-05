@@ -39,6 +39,23 @@ body {
   margin-bottom: 30px;
 }
 
+.filters {
+  display: flex;
+  gap: 8px;
+}
+
+.filters button {
+  width: auto;
+  margin: 0;
+  cursor: pointer;
+}
+
+.filters button.active {
+  border-color: #2563eb;
+  background: #2563eb;
+  color: #fff;
+}
+
 form {
   display: grid;
   gap: 12px;
@@ -86,7 +103,51 @@ button.secondary {
   margin-top: 14px;
 }
 
-.expense_item {
-  background: #000;
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #dbeafe;
+  color: #1e3a8a;
+}
+
+.chip button {
+  width: auto;
+  margin: 0;
+  padding: 0 4px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.expense-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid #dbe3ee;
+}
+
+.expense-item p {
+  margin: 4px 0 0;
+  color: #64748b;
+}
+
+.delete {
+  width: auto;
+  margin: 0;
+  padding: 8px 12px;
+  border-color: #dc2626;
+  background: #dc2626;
   color: #fff;
+  cursor: pointer;
+}
+
+[hidden] {
+  display: none !important;
 }
