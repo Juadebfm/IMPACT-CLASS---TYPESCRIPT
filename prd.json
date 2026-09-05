@@ -1,0 +1,850 @@
+{
+  "prd_id": "expense-tracker-product-v1",
+  "title": "Expense Tracker",
+  "status": "Draft for Product Design",
+  "intended_consumers": [
+    "Product designer",
+    "React TypeScript developer",
+    "Backend developer",
+    "QA"
+  ],
+  "baseline_verified": {
+    "current_project": "Vanilla TypeScript browser application",
+    "current_storage": "Browser localStorage",
+    "current_features": [
+      "Demo registration and login",
+      "Expense creation and deletion",
+      "Custom categories",
+      "Personal and organization expense scopes",
+      "Scope filters",
+      "Local session persistence"
+    ],
+    "important_constraint": "The current implementation stores passwords and product data locally. It is not suitable as the security, data, or authentication architecture for the production product."
+  },
+  "product_direction": {
+    "product_type": "Dynamic, authenticated, cloud-backed expense management product",
+    "frontend_target": "React with TypeScript",
+    "supported_personas": [
+      "Individual managing personal expenses",
+      "Member of a household or shared group",
+      "Member or administrator of a small organization"
+    ],
+    "supported_currencies_v1": ["NGN", "USD"],
+    "currency_rule_v1": "Every monetary value must have an explicit ISO currency code. The product must not combine NGN and USD totals unless a future exchange-rate and conversion policy is approved.",
+    "primary_value_proposition": "Help people and teams capture expenses, understand where money goes, stay within budgets, and manage shared financial responsibilities from one trustworthy product."
+  },
+  "problem_statement": "Individuals, households, and small organizations often record spending inconsistently across notes, chats, bank alerts, and spreadsheets. This makes it difficult to understand current spend, control budgets, identify recurring costs, and settle shared expenses fairly. A secure, structured tracker should provide a clear source of truth while respecting the different privacy and collaboration needs of personal and shared spending.",
+  "goals": [
+    {
+      "id": "G1",
+      "goal": "Enable a signed-in user to record a complete expense in a personal or shared workspace with a clear outcome and persisted data."
+    },
+    {
+      "id": "G2",
+      "goal": "Enable users to understand spending by period, category, workspace, and currency without misleading cross-currency aggregation."
+    },
+    {
+      "id": "G3",
+      "goal": "Enable users to create and monitor budgets, including category-level budgets, for NGN and USD independently."
+    },
+    {
+      "id": "G4",
+      "goal": "Enable household and organization members to see authorized shared expenses and their outstanding shared-expense obligations."
+    },
+    {
+      "id": "G5",
+      "goal": "Provide a responsive, accessible experience that works for frequent mobile expense entry and detailed desktop review."
+    }
+  ],
+  "success_metrics": {
+    "measurement_note": "No baseline, analytics platform, launch date, or commercial target was supplied. Numeric targets must be agreed before launch; these metrics define what to instrument and evaluate.",
+    "leading": [
+      {
+        "metric": "Activation rate",
+        "definition": "Percentage of new verified users who create at least one expense within seven days of account creation.",
+        "target": null
+      },
+      {
+        "metric": "Expense-entry completion rate",
+        "definition": "Percentage of started expense forms that are successfully saved.",
+        "target": null
+      },
+      {
+        "metric": "Budget setup rate",
+        "definition": "Percentage of active users who create at least one budget.",
+        "target": null
+      },
+      {
+        "metric": "Shared-workspace activation",
+        "definition": "Percentage of workspace owners who invite at least one member and record at least one shared expense.",
+        "target": null
+      }
+    ],
+    "lagging": [
+      {
+        "metric": "Four-week retention",
+        "definition": "Percentage of activated users who return and perform a meaningful finance action in week four.",
+        "target": null
+      },
+      {
+        "metric": "Monthly active expense recorders",
+        "definition": "Users who create, edit, import, or settle at least one expense in a calendar month.",
+        "target": null
+      },
+      {
+        "metric": "Budget adherence",
+        "definition": "Percentage of active budgets whose owners review their progress before the budget period ends.",
+        "target": null
+      }
+    ]
+  },
+  "personas": [
+    {
+      "id": "individual",
+      "name": "Individual tracker",
+      "needs": [
+        "Quick, private expense capture",
+        "Monthly spending visibility",
+        "Simple category and budget control"
+      ]
+    },
+    {
+      "id": "shared_member",
+      "name": "Household or shared-group member",
+      "needs": [
+        "See shared spending they are allowed to see",
+        "Record a bill paid on behalf of others",
+        "Understand what they owe or are owed"
+      ]
+    },
+    {
+      "id": "workspace_owner",
+      "name": "Household or organization owner",
+      "needs": [
+        "Create and manage a workspace",
+        "Invite and manage members",
+        "Set shared budgets and review group spending"
+      ]
+    },
+    {
+      "id": "workspace_admin",
+      "name": "Household or organization administrator",
+      "needs": [
+        "Manage shared categories and budgets",
+        "Review shared expenses",
+        "Maintain accurate group records"
+      ]
+    }
+  ],
+  "user_stories": [
+    {
+      "priority": "P0",
+      "persona": "Individual tracker",
+      "story": "As an individual, I want to create a secure account and a personal workspace so that my financial records persist safely across devices."
+    },
+    {
+      "priority": "P0",
+      "persona": "Individual tracker",
+      "story": "As an individual, I want to add, edit, and delete an expense with its amount, currency, date, category, and payment information so that my records stay accurate."
+    },
+    {
+      "priority": "P0",
+      "persona": "Individual tracker",
+      "story": "As an individual, I want to view spending totals by category and period so that I can understand where my money goes."
+    },
+    {
+      "priority": "P0",
+      "persona": "Individual tracker",
+      "story": "As an individual, I want to set a monthly total or category budget so that I can recognize when my spending is approaching or exceeding a limit."
+    },
+    {
+      "priority": "P0",
+      "persona": "Workspace owner",
+      "story": "As a workspace owner, I want to create a household or organization workspace and invite members so that authorized people can manage shared spending together."
+    },
+    {
+      "priority": "P0",
+      "persona": "Shared-group member",
+      "story": "As a shared-group member, I want to record a shared expense and choose how it is split so that each person's financial responsibility is transparent."
+    },
+    {
+      "priority": "P0",
+      "persona": "Shared-group member",
+      "story": "As a shared-group member, I want to see balances that I owe or am owed so that I can settle shared costs."
+    },
+    {
+      "priority": "P1",
+      "persona": "Workspace administrator",
+      "story": "As an administrator, I want to review organization spending against shared budgets so that I can spot cost overruns early."
+    },
+    {
+      "priority": "P1",
+      "persona": "Individual tracker",
+      "story": "As an individual, I want recurring expenses to be created or surfaced predictably so that regular obligations are not forgotten."
+    },
+    {
+      "priority": "P1",
+      "persona": "Individual tracker",
+      "story": "As an individual, I want to export my permitted expense records so that I can use them outside the product."
+    }
+  ],
+  "scope": {
+    "P0_release": {
+      "name": "Trusted expense tracking, budgeting, and basic shared spending",
+      "includes": [
+        "Real account authentication and password recovery",
+        "Cloud persistence and server-enforced authorization",
+        "Personal, household/shared-group, and organization workspaces",
+        "Expense create, read, update, and delete",
+        "NGN and USD expense and budget support",
+        "Categories and payment methods",
+        "Search, filters, sorting, and date-range selection",
+        "Dashboard totals, category breakdowns, and recent activity",
+        "Monthly total and category budgets",
+        "Workspace invitations and member access",
+        "Equal and custom shared-expense splits",
+        "Member balances and settlement recording",
+        "Responsive and accessible design",
+        "Empty, loading, validation, offline, and error states"
+      ]
+    },
+    "P1_fast_follow": {
+      "name": "Automation and deeper reporting",
+      "includes": [
+        "Recurring expenses",
+        "Receipt attachments",
+        "CSV export",
+        "Saved filters",
+        "Budget and recurring-expense reminders",
+        "Trend comparison with previous periods",
+        "Workspace activity history",
+        "Organization approval workflow"
+      ]
+    },
+    "P2_future_considerations": {
+      "name": "Capabilities requiring separate discovery",
+      "includes": [
+        "Bank account connection and transaction import",
+        "Currency conversion using a defined exchange-rate provider and policy",
+        "Tax reporting",
+        "Accounting software integrations",
+        "Multi-level organization structures",
+        "Native iOS and Android applications",
+        "AI-generated financial guidance"
+      ]
+    }
+  },
+  "non_goals_v1": [
+    {
+      "item": "Bank transfers, card payments, or holding user funds",
+      "reason": "The product records and organizes expenses; it is not a payment processor."
+    },
+    {
+      "item": "Automatic conversion between NGN and USD",
+      "reason": "Accurate conversion requires an approved rate source, timing rule, and financial-data policy."
+    },
+    {
+      "item": "Full accounting, invoicing, payroll, or tax filing",
+      "reason": "These are separate financial-product domains and would materially expand scope."
+    },
+    {
+      "item": "Public social sharing of financial activity",
+      "reason": "Financial records are private by default."
+    },
+    {
+      "item": "Replacing all finance tools for large enterprises",
+      "reason": "The initial product is designed for individuals, households, and small organizations."
+    }
+  ],
+  "core_concepts": {
+    "user": "A person with a verified account and profile.",
+    "workspace": "A container for financial data. Types are personal, household, and organization.",
+    "personal_workspace": "A private workspace automatically available to a user. Only its owner can access it in v1.",
+    "shared_workspace": "A household or organization workspace with invited members and role-based permissions.",
+    "expense": "A recorded outflow of money associated with one workspace, a currency, a date, category, payer, and creator.",
+    "budget": "A spending limit for a workspace, period, currency, and optionally a category.",
+    "split": "A defined allocation of a shared expense among workspace members.",
+    "settlement": "A record that reduces a member's balance after they repay another member.",
+    "currency": "An ISO 4217 currency code. P0 supports only NGN and USD."
+  },
+  "permission_model": {
+    "status": "Proposed model requiring product-owner confirmation before implementation",
+    "roles": [
+      {
+        "role": "owner",
+        "permissions": [
+          "Manage workspace settings",
+          "Invite, remove, and assign member roles",
+          "Create, edit, and delete any shared expense",
+          "Create and manage shared budgets",
+          "View workspace reporting"
+        ]
+      },
+      {
+        "role": "admin",
+        "permissions": [
+          "Invite members",
+          "Create, edit, and delete any shared expense",
+          "Create and manage shared categories and budgets",
+          "View workspace reporting"
+        ]
+      },
+      {
+        "role": "member",
+        "permissions": [
+          "View shared workspace data",
+          "Create expenses",
+          "Edit or delete own expenses",
+          "Participate in shared-expense splits and settlements",
+          "View budgets and reports"
+        ]
+      },
+      {
+        "role": "viewer",
+        "permissions": [
+          "View authorized shared workspace data and reports",
+          "Cannot create, edit, delete, settle, or manage members"
+        ]
+      }
+    ],
+    "security_rule": "The backend must enforce workspace membership and permissions for every data request. The interface must not be the only access-control layer."
+  },
+  "functional_requirements": [
+    {
+      "id": "AUTH-01",
+      "priority": "P0",
+      "requirement": "Users can register, sign in, sign out, verify their email, request a password reset, and set a new password.",
+      "acceptance_criteria": [
+        "A new account cannot be used until the selected verification policy is satisfied.",
+        "Passwords are never returned to or stored by the client in plaintext.",
+        "An invalid sign-in attempt shows a clear, non-sensitive error message.",
+        "An authenticated session survives a browser refresh according to the approved session policy.",
+        "Signing out removes the active session from the device."
+      ]
+    },
+    {
+      "id": "ONB-01",
+      "priority": "P0",
+      "requirement": "New users complete lightweight onboarding that creates a personal workspace and collects a display name, default currency, and optional first budget.",
+      "acceptance_criteria": [
+        "The default currency choices are NGN and USD.",
+        "The user can skip budget creation and reach an empty dashboard.",
+        "The selected default currency is preselected for new applicable records but remains editable."
+      ]
+    },
+    {
+      "id": "WS-01",
+      "priority": "P0",
+      "requirement": "Users can create, switch between, and view workspaces they are authorized to access.",
+      "acceptance_criteria": [
+        "Each user has one personal workspace created during onboarding.",
+        "A user can create a household or organization workspace with a name and primary currency.",
+        "The current workspace is obvious in every product area where data is shown or created.",
+        "Switching workspace updates dashboard, expenses, budgets, members, and permissions consistently."
+      ]
+    },
+    {
+      "id": "WS-02",
+      "priority": "P0",
+      "requirement": "Owners and admins can invite members to shared workspaces and manage membership according to their role.",
+      "acceptance_criteria": [
+        "An invitation identifies the target workspace and assigned role.",
+        "Pending, accepted, expired, and failed invitation states are visible.",
+        "A member cannot access workspace records before accepting a valid invitation.",
+        "Removing a member prevents future access without deleting historical records they created."
+      ]
+    },
+    {
+      "id": "EXP-01",
+      "priority": "P0",
+      "requirement": "Users with permission can create an expense.",
+      "fields": [
+        "Title or merchant",
+        "Amount",
+        "Currency",
+        "Expense date",
+        "Category",
+        "Workspace",
+        "Paid by",
+        "Payment method",
+        "Optional notes",
+        "Optional shared split"
+      ],
+      "acceptance_criteria": [
+        "Amount must be greater than zero and stored with its currency.",
+        "The expense date can be today or a past date; future-date policy is an open decision.",
+        "Only categories available in the selected workspace can be selected.",
+        "The user receives confirmation after a successful save.",
+        "A failed save preserves entered information and explains the next action.",
+        "A user cannot create an expense in a workspace they cannot access."
+      ]
+    },
+    {
+      "id": "EXP-02",
+      "priority": "P0",
+      "requirement": "Authorized users can view, search, filter, sort, edit, and delete expenses.",
+      "acceptance_criteria": [
+        "The list supports filters for date range, category, currency, payment method, payer, and shared/private status where applicable.",
+        "Search matches expense title or merchant.",
+        "The list shows a useful empty state when no matching expenses exist.",
+        "Edits update all affected totals, budgets, splits, and reports.",
+        "Destructive deletion requires confirmation and is limited by workspace permissions.",
+        "Each displayed expense shows its date, category, currency-formatted amount, workspace context, and payer."
+      ]
+    },
+    {
+      "id": "CAT-01",
+      "priority": "P0",
+      "requirement": "Users can use default categories and authorized owners or admins can manage workspace categories.",
+      "acceptance_criteria": [
+        "Duplicate category names are prevented within the same workspace without case sensitivity.",
+        "A category that is already in use cannot be silently removed.",
+        "The user is given an explicit reassignment or preservation path before removing an in-use category.",
+        "Personal categories are not automatically exposed in a shared workspace."
+      ]
+    },
+    {
+      "id": "DASH-01",
+      "priority": "P0",
+      "requirement": "The dashboard presents clear, truthful summaries for the selected workspace, date range, and currency.",
+      "acceptance_criteria": [
+        "Dashboard totals reflect the active workspace, filters, and date range.",
+        "NGN and USD totals are shown separately when both currencies are present.",
+        "The dashboard includes current-period total spend, budget progress, category breakdown, recent expenses, and shared balance summary where relevant.",
+        "The dashboard has clear empty, loading, and error states.",
+        "The interface never labels an incomplete or mixed-currency total as a single combined spend total."
+      ]
+    },
+    {
+      "id": "BUD-01",
+      "priority": "P0",
+      "requirement": "Authorized users can create, edit, archive, and view budgets for a selected workspace.",
+      "acceptance_criteria": [
+        "A budget includes a name, period, amount, currency, and optional category.",
+        "P0 supports monthly budgets; other periods are deferred unless approved.",
+        "Budget progress updates when relevant expenses are created, edited, or deleted.",
+        "The design distinguishes on-track, approaching limit, and exceeded states without relying only on color.",
+        "A budget only counts expenses with its currency; no currency conversion is applied."
+      ]
+    },
+    {
+      "id": "SPLIT-01",
+      "priority": "P0",
+      "requirement": "Shared-workspace users can split an expense equally or by custom amounts among eligible members.",
+      "acceptance_criteria": [
+        "The sum of custom split amounts must equal the full expense amount in the expense currency.",
+        "Equal split distributes the amount across the selected members and defines how rounding is handled.",
+        "The expense identifies who paid and who owes a share.",
+        "Private personal-workspace expenses cannot accidentally create obligations for other users.",
+        "Split details are visible from the expense detail view."
+      ]
+    },
+    {
+      "id": "SPLIT-02",
+      "priority": "P0",
+      "requirement": "Shared-workspace users can view balances and record settlements.",
+      "acceptance_criteria": [
+        "Balances are displayed per currency and never combined across NGN and USD.",
+        "A settlement identifies payer, recipient, amount, currency, date, and optional note.",
+        "Recording a settlement updates outstanding balances.",
+        "Users can inspect the expenses and settlements contributing to a displayed balance."
+      ]
+    },
+    {
+      "id": "SET-01",
+      "priority": "P0",
+      "requirement": "Users can manage profile and product preferences.",
+      "acceptance_criteria": [
+        "Users can change display name and default currency.",
+        "Users can view active sessions or approved equivalent account-security controls.",
+        "Users can initiate account deletion according to the approved data-retention policy."
+      ]
+    },
+    {
+      "id": "RPT-01",
+      "priority": "P1",
+      "requirement": "Users can export records they are authorized to view in CSV format.",
+      "acceptance_criteria": [
+        "Export honors selected workspace, filters, date range, and permissions.",
+        "The export identifies fields and currencies clearly.",
+        "The product communicates when an export contains no records."
+      ]
+    },
+    {
+      "id": "REC-01",
+      "priority": "P1",
+      "requirement": "Users can create recurring-expense rules and review generated or upcoming expenses.",
+      "acceptance_criteria": [
+        "A rule includes cadence, next occurrence, amount, currency, category, and workspace.",
+        "Users can pause, edit, or stop a rule.",
+        "The product prevents duplicate creation for the same recurrence occurrence."
+      ]
+    },
+    {
+      "id": "ATT-01",
+      "priority": "P1",
+      "requirement": "Users can attach a receipt to an expense they are allowed to edit.",
+      "acceptance_criteria": [
+        "The interface validates supported file types and size limits defined by engineering.",
+        "An attachment is visible only to users permitted to view the expense.",
+        "Users receive an understandable upload failure state and retry path."
+      ]
+    }
+  ],
+  "design_requirements": {
+    "deliverables": [
+      "Responsive wireframes and high-fidelity screens for mobile, tablet, and desktop",
+      "Component inventory and interaction states",
+      "Prototype for the primary onboarding, expense-entry, budgeting, workspace-switching, invitation, and settlement flows",
+      "Accessibility annotations",
+      "Empty, loading, validation, permission-denied, offline, and server-error states"
+    ],
+    "screens": [
+      "Marketing or entry page",
+      "Sign up, sign in, email verification, forgot-password, and reset-password screens",
+      "Onboarding: profile, default currency, personal workspace, optional first budget",
+      "Dashboard",
+      "Expense list",
+      "Create expense",
+      "Expense detail",
+      "Edit expense",
+      "Expense deletion confirmation",
+      "Categories management",
+      "Budgets list",
+      "Create and edit budget",
+      "Budget detail",
+      "Shared split editor",
+      "Balances and settlements",
+      "Create settlement",
+      "Workspace switcher",
+      "Create workspace",
+      "Workspace members and invitations",
+      "Workspace settings",
+      "Profile and account settings",
+      "Permission-denied and not-found states"
+    ],
+    "navigation": {
+      "primary_sections": [
+        "Dashboard",
+        "Expenses",
+        "Budgets",
+        "Shared",
+        "Workspace"
+      ],
+      "mobile_requirement": "Expense creation must be reachable with a prominent one-handed mobile action.",
+      "context_requirement": "The active workspace, period, and currency context must be visible before a user interprets financial totals or saves an expense."
+    },
+    "interaction_rules": [
+      "Use locale-aware formatting for NGN and USD.",
+      "Never rely only on color to convey budget state, destructive actions, validation, or financial balance direction.",
+      "Present destructive actions with clear confirmation and consequence language.",
+      "Preserve form data after recoverable validation or network errors.",
+      "Use optimistic UI only when the design includes a clear pending and rollback state.",
+      "Do not expose data or actions that the active role cannot access."
+    ],
+    "accessibility": [
+      "Meet WCAG 2.2 AA as the target standard.",
+      "All core flows must support keyboard navigation and visible focus.",
+      "Inputs require programmatic labels and actionable validation messages.",
+      "Charts require equivalent text summaries or data tables.",
+      "Currency, dates, balances, and budget states must remain understandable to screen-reader users."
+    ]
+  },
+  "primary_flows": [
+    {
+      "name": "First-time personal user",
+      "steps": [
+        "Register account",
+        "Verify account according to authentication policy",
+        "Set display name and default currency",
+        "Personal workspace is created",
+        "Optionally create first budget",
+        "Reach empty dashboard with guided first-expense action",
+        "Create first expense",
+        "See updated dashboard and budget progress"
+      ]
+    },
+    {
+      "name": "Create shared workspace",
+      "steps": [
+        "Open workspace switcher",
+        "Create household or organization workspace",
+        "Set name and primary currency",
+        "Invite a member and assign role",
+        "View invitation status",
+        "Member accepts invitation",
+        "Both members can access authorized shared data"
+      ]
+    },
+    {
+      "name": "Record and split a shared expense",
+      "steps": [
+        "Select shared workspace",
+        "Create expense and identify payer",
+        "Choose equal or custom split",
+        "Validate split totals",
+        "Save expense",
+        "Show updated expense list, balances, and relevant budget"
+      ]
+    },
+    {
+      "name": "Monitor a budget",
+      "steps": [
+        "Select workspace and currency",
+        "Open budgets",
+        "Create a monthly total or category budget",
+        "Record expenses",
+        "Review progress and category detail",
+        "Recognize approaching or exceeded state",
+        "Adjust budget or spending behavior"
+      ]
+    }
+  ],
+  "data_model_direction": {
+    "entities": [
+      {
+        "name": "User",
+        "minimum_fields": [
+          "id",
+          "email",
+          "displayName",
+          "defaultCurrency",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      {
+        "name": "Workspace",
+        "minimum_fields": [
+          "id",
+          "name",
+          "type",
+          "primaryCurrency",
+          "ownerId",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      {
+        "name": "WorkspaceMembership",
+        "minimum_fields": [
+          "id",
+          "workspaceId",
+          "userId",
+          "role",
+          "status",
+          "createdAt"
+        ]
+      },
+      {
+        "name": "Category",
+        "minimum_fields": [
+          "id",
+          "workspaceId",
+          "name",
+          "isArchived",
+          "createdAt"
+        ]
+      },
+      {
+        "name": "Expense",
+        "minimum_fields": [
+          "id",
+          "workspaceId",
+          "createdByUserId",
+          "paidByUserId",
+          "title",
+          "amount",
+          "currency",
+          "expenseDate",
+          "categoryId",
+          "paymentMethod",
+          "notes",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      {
+        "name": "Budget",
+        "minimum_fields": [
+          "id",
+          "workspaceId",
+          "name",
+          "amount",
+          "currency",
+          "periodType",
+          "periodStart",
+          "categoryId",
+          "status",
+          "createdAt",
+          "updatedAt"
+        ]
+      },
+      {
+        "name": "ExpenseSplit",
+        "minimum_fields": [
+          "id",
+          "expenseId",
+          "memberId",
+          "amount",
+          "currency",
+          "status"
+        ]
+      },
+      {
+        "name": "Settlement",
+        "minimum_fields": [
+          "id",
+          "workspaceId",
+          "paidByUserId",
+          "receivedByUserId",
+          "amount",
+          "currency",
+          "settlementDate",
+          "notes",
+          "createdAt"
+        ]
+      },
+      {
+        "name": "WorkspaceInvitation",
+        "minimum_fields": [
+          "id",
+          "workspaceId",
+          "email",
+          "role",
+          "status",
+          "expiresAt",
+          "createdAt"
+        ]
+      }
+    ],
+    "integrity_rules": [
+      "Use integer minor units or an equivalent fixed-precision monetary representation; do not use floating-point arithmetic for stored financial amounts.",
+      "Store timestamps in UTC and present dates using the user's selected locale and timezone policy.",
+      "Use immutable identifiers rather than array positions.",
+      "Expense splits and settlements must reference the same currency as their associated obligation.",
+      "Historical expense records must retain enough category and payer context to remain understandable if later settings change."
+    ]
+  },
+  "non_functional_requirements": [
+    {
+      "area": "Security",
+      "requirements": [
+        "Use a production-grade authentication approach.",
+        "Hash passwords server-side when password authentication is used.",
+        "Apply authorization checks server-side for every protected resource.",
+        "Use secure session handling and transport encryption.",
+        "Do not log credentials, tokens, full financial notes, or receipt contents."
+      ]
+    },
+    {
+      "area": "Privacy",
+      "requirements": [
+        "Personal workspace data is private by default.",
+        "Shared workspace data is visible only to authorized members.",
+        "Account deletion, data retention, and export policy require a documented legal and business decision."
+      ]
+    },
+    {
+      "area": "Reliability",
+      "requirements": [
+        "Data-saving actions must report success, pending, or failure clearly.",
+        "The application must prevent duplicate submissions caused by repeated input or retries.",
+        "Server and network errors must have a recovery path."
+      ]
+    },
+    {
+      "area": "Performance",
+      "requirements": [
+        "The product must remain usable on current mobile browsers and common desktop browsers.",
+        "Performance targets require engineering measurement and agreement before launch."
+      ]
+    },
+    {
+      "area": "Observability",
+      "requirements": [
+        "Instrument privacy-safe events for registration, activation, expense creation, budget creation, invitation lifecycle, split creation, settlement creation, and export.",
+        "Track errors without exposing confidential financial content."
+      ]
+    }
+  ],
+  "open_questions": [
+    {
+      "id": "OQ-01",
+      "owner": "Product owner",
+      "blocking": true,
+      "question": "Should a household and an organization have the same role model and expense permissions, or should organization members require an approval workflow before expenses count toward reporting and budgets?"
+    },
+    {
+      "id": "OQ-02",
+      "owner": "Product owner and legal",
+      "blocking": true,
+      "question": "Which countries and legal/privacy requirements apply to account creation, financial data retention, account deletion, and receipt storage?"
+    },
+    {
+      "id": "OQ-03",
+      "owner": "Product owner",
+      "blocking": true,
+      "question": "Should P0 permit future-dated expenses, or only current and past expenses?"
+    },
+    {
+      "id": "OQ-04",
+      "owner": "Product owner",
+      "blocking": true,
+      "question": "What rounding rule should apply when an NGN or USD shared expense cannot be divided equally in minor units?"
+    },
+    {
+      "id": "OQ-05",
+      "owner": "Product owner",
+      "blocking": false,
+      "question": "Should users be able to belong to multiple households or organizations in P0?"
+    },
+    {
+      "id": "OQ-06",
+      "owner": "Product owner and engineering",
+      "blocking": false,
+      "question": "Which authentication methods are required beyond email and password, such as Google, Apple, or passkeys?"
+    },
+    {
+      "id": "OQ-07",
+      "owner": "Product owner",
+      "blocking": false,
+      "question": "What visual brand, tone, and design-system constraints should the design agent follow?"
+    },
+    {
+      "id": "OQ-08",
+      "owner": "Product owner",
+      "blocking": false,
+      "question": "When exchange-rate support is introduced, should the product use the transaction-time rate, current rate, user-entered rate, or all of these?"
+    }
+  ],
+  "delivery_phases": [
+    {
+      "phase": "0",
+      "name": "Product and technical decisions",
+      "exit_criteria": [
+        "Open blocking questions are answered",
+        "Authentication and backend architecture are selected",
+        "Privacy and retention policy is approved",
+        "Design direction is approved"
+      ]
+    },
+    {
+      "phase": "1",
+      "name": "P0 design and build",
+      "exit_criteria": [
+        "Core personal and shared flows are designed, implemented, and tested",
+        "Authorization and currency integrity rules are verified",
+        "Responsive and accessibility acceptance criteria are met",
+        "Analytics instrumentation is verified"
+      ]
+    },
+    {
+      "phase": "2",
+      "name": "P1 enhancement",
+      "exit_criteria": [
+        "Recurring expenses, export, receipts, and deeper reporting are prioritized against P0 usage data"
+      ]
+    }
+  ]
+}
